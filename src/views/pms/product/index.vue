@@ -4,19 +4,7 @@
       <div>
         <i class="el-icon-search"></i>
         <span>筛选搜索</span>
-        <el-button
-          style="float: right"
-          @click="handleSearchList()"
-          type="primary"
-          size="small">
-          查询结果
-        </el-button>
-        <el-button
-          style="float: right;margin-right: 15px"
-          @click="handleResetSearch()"
-          size="small">
-          重置
-        </el-button>
+        
       </div>
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
@@ -63,6 +51,19 @@
               </el-option>
             </el-select>
           </el-form-item>
+
+          <el-button
+          style="float: right;margin-right: 50px"
+          @click="handleSearchList()"
+          type="success">
+          开始查询
+        </el-button>
+        <el-button
+          style="float: right;margin-right: 25px"
+          @click="handleResetSearch()">
+          重置
+        </el-button>
+
         </el-form>
       </div>
     </el-card>
@@ -71,9 +72,9 @@
       <span>数据列表</span>
       <el-button
         class="btn-add"
-        @click="handleAddProduct()"
-        size="mini">
-        添加
+        type="warning"
+        @click="handleAddProduct()">
+        添加商品
       </el-button>
     </el-card>
     <div class="table-container">
@@ -83,26 +84,26 @@
                 @selection-change="handleSelectionChange"
                 v-loading="listLoading"
                 border>
-        <el-table-column type="selection" width="60" align="center"></el-table-column>
+        <!-- <el-table-column type="selection" width="60" align="center"></el-table-column> -->
         <el-table-column label="编号" width="100" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
-        <el-table-column label="商品图片" width="120" align="center">
+        <!-- <el-table-column label="商品图片" width="120" align="center">
           <template slot-scope="scope"><img style="height: 80px" :src="scope.row.pic"></template>
-        </el-table-column>
-        <el-table-column label="商品名称" align="center">
+        </el-table-column> -->
+        <el-table-column label="商品名称" align="center" width="400">
           <template slot-scope="scope">
             <p>{{scope.row.name}}</p>
             <p>品牌：{{scope.row.brandName}}</p>
           </template>
         </el-table-column>
-        <el-table-column label="价格/货号" width="120" align="center">
+        <el-table-column label="价格/货号" width="208" align="center">
           <template slot-scope="scope">
             <p>价格：￥{{scope.row.price}}</p>
             <p>货号：{{scope.row.productSn}}</p>
           </template>
         </el-table-column>
-        <el-table-column label="标签" width="140" align="center">
+        <el-table-column label="标签" width="170" align="center">
           <template slot-scope="scope">
             <p>上架：
               <el-switch
@@ -130,18 +131,18 @@
             </p>
           </template>
         </el-table-column>
-        <el-table-column label="排序" width="100" align="center">
+        <!-- <el-table-column label="排序" width="100" align="center">
           <template slot-scope="scope">{{scope.row.sort}}</template>
-        </el-table-column>
-        <el-table-column label="SKU库存" width="100" align="center">
+        </el-table-column> -->
+        <el-table-column label="库存" width="130" align="center">
           <template slot-scope="scope">
             <el-button type="primary" icon="el-icon-edit" @click="handleShowSkuEditDialog(scope.$index, scope.row)" circle></el-button>
           </template>
         </el-table-column>
-        <el-table-column label="销量" width="100" align="center">
+        <el-table-column label="销量" width="160" align="center">
           <template slot-scope="scope">{{scope.row.sale}}</template>
         </el-table-column>
-        <el-table-column label="审核状态" width="100" align="center">
+        <!-- <el-table-column label="审核状态" width="100" align="center">
           <template slot-scope="scope">
             <p>{{scope.row.verifyStatus | verifyStatusFilter}}</p>
             <p>
@@ -151,35 +152,29 @@
               </el-button>
             </p>
           </template>
-        </el-table-column>
-        <el-table-column label="操作" width="160" align="center">
+        </el-table-column> -->
+        <el-table-column label="操作" width="300" align="center">
           <template slot-scope="scope">
-            <p>
-              <el-button
+              <!-- <el-button
                 size="mini"
                 @click="handleShowProduct(scope.$index, scope.row)">查看
-              </el-button>
+              </el-button> -->
               <el-button
-                size="mini"
                 @click="handleUpdateProduct(scope.$index, scope.row)">编辑
               </el-button>
-            </p>
-            <p>
-              <el-button
+              <!-- <el-button
                 size="mini"
                 @click="handleShowLog(scope.$index, scope.row)">日志
-              </el-button>
+              </el-button> -->
               <el-button
-                size="mini"
                 type="danger"
                 @click="handleDelete(scope.$index, scope.row)">删除
               </el-button>
-            </p>
           </template>
         </el-table-column>
       </el-table>
     </div>
-    <div class="batch-operate-container">
+    <!-- <div class="batch-operate-container">
       <el-select
         size="small"
         v-model="operateType" placeholder="批量操作">
@@ -198,7 +193,7 @@
         size="small">
         确定
       </el-button>
-    </div>
+    </div> -->
     <div class="pagination-container">
       <el-pagination
         background
@@ -644,6 +639,14 @@
     }
   }
 </script>
-<style></style>
+<style scoped>
+.btn-add{
+  margin-bottom: 20px;
+  margin-right: 30px;
+}
+.pagination-container{
+  margin-bottom: 40px;
+}
+</style>
 
 
